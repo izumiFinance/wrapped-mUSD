@@ -2,10 +2,7 @@
 const secret = require('./.secret.js');
 
 const sk = secret.pk;
-const sk2 = secret.pk2;
-const sk3 = secret.pk3;
 const apiKey = secret.apiKey;
-const izumiRpcUrl = "http://47.241.103.6:9545";
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
@@ -38,12 +35,6 @@ module.exports = {
   },
 
   networks: {
-    izumiTest: {
-      url: izumiRpcUrl,
-      gas: 8000000,
-      gasPrice: 20000000000,
-      accounts: [sk, sk2, sk3]
-    },
     arbitrum: {
       url: 'https://arb1.arbitrum.io/rpc',
       accounts: [sk]
@@ -66,32 +57,23 @@ module.exports = {
     },
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
-      gas: 10000000,
-      gasPrice: 5500000000,
       accounts: [sk]
     },
     ethereum: {
       url: "https://mainnet.infura.io/v3/{your eth api key}",
-      gas: 800000,
-      gasPrice: 45000000000,
       accounts: [sk]
     },
     bsc: {
       url: "https://bsc-dataseed.binance.org/",
-      gas: 800000,
-      gasPrice: 5000000000,
       accounts: [sk]
     },
     bscTest: {
 	    url: 'https://data-seed-prebsc-1-s2.binance.org:8545/',
       accounts: [sk],
-      // gas: 90000000,
-      gasPrice: 20000000000,
     },
     opBNBTest: {
       url: 'https://opbnb-testnet-rpc.bnbchain.org',
       accounts: [sk],
-      gasPrice: 5000000000,
     },
     opBNB: {
       url: 'https://opbnb-mainnet-rpc.bnbchain.org',
@@ -108,17 +90,14 @@ module.exports = {
     goerli: {
       url: 'https://goerli.prylabs.net',
       accounts: [sk],
-      gasPrice: 10000000000,
     },
     auroraTest: {
       url: 'https://testnet.aurora.dev',
       accounts: [sk],
-      gasPrice: 5000000000,
     },
     etc: {
       url: 'https://www.ethercluster.com/etc',
       accounts: [sk],
-      gasPrice: 1100000000,
     },
     polygon: {
       url: 'https://rpc-mainnet.maticvigil.com',
@@ -167,7 +146,6 @@ module.exports = {
     confluxEspace: {
       url: 'https://evm.confluxrpc.com',
       accounts: [sk],
-      chainId: 1030,
     },
     meter: {
       url: 'https://rpc.meter.io',
@@ -196,7 +174,6 @@ module.exports = {
     opBNB: {
        url: 'https://opbnb-mainnet-rpc.bnbchain.org',
        accounts: [sk],
-       gasPrice: 100,
     },
     opsideTestRollux: {
        url: 'https://pre-alpha-zkrollup-rpc.opside.network/public',
@@ -209,7 +186,6 @@ module.exports = {
     baseTest: {
       url: 'https://goerli.base.org',
       accounts: [sk],
-      gasPrice: 110000000
     },
     loot: {
       url: 'https://rpc.lootchain.com/http',
@@ -242,7 +218,6 @@ module.exports = {
     kromaMainnet: {
       url: 'https://api.kroma.network/',
       accounts: [sk],
-      gasPrice: 60
     },
     gasZeroGoerliL2: {
       url: 'https://goerlitest.gaszero.com/',
