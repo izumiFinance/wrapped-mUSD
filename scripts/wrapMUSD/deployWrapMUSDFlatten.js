@@ -18,7 +18,7 @@ async function main() {
   for ( var i in para) { console.log("    " + i + ": " + para[i]); }
 
   // We get the contract to deploy
-  const WrapMUSDFactory = await hardhat.ethers.getContractFactory("WrapMUSD")
+  const WrapMUSDFactory = await hardhat.ethers.getContractFactory("WrapMUSDFlatten")
   const WrapMUSD = await WrapMUSDFactory.deploy(
       para.tokenName,
       para.tokenSymbol,
