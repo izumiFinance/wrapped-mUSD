@@ -2,6 +2,8 @@
 
 pragma solidity ^0.8.20;
 
+import {ERC20Permit} from "./permit/ERC20Permit.sol";
+
 /**
  * @dev interfaces of MUSD
  */
@@ -34,7 +36,7 @@ interface IMUSD {
     ) external returns (uint256);
 }
 
-contract WrapMUSDFlatten {
+contract WrapMUSD is ERC20Permit {
     /**
      * name of this token
      */
@@ -181,7 +183,9 @@ contract WrapMUSDFlatten {
         string memory _symbol, 
         address _mUSD,
         address _chargeReceiver
-    ) {
+    ) 
+    ERC20Permit(_name)
+    {
         name = _name;
         symbol = _symbol;
         mUSD = _mUSD;
@@ -321,11 +325,15 @@ contract WrapMUSDFlatten {
                 chargeShares += balanceSrc.shares;
                 balanceSrc.shares = 0;
             }
-            balanceOf[src] = balanceSrc.balance;
-            sharesOf[src] = balanceSrc.shares;
-            balanceOf[dst] = balanceDst.balance;
-            sharesOf[dst] = balanceDst.shares;
+            balanceOf[src] = balanceSrc.shares;
+            sharesOf[src] = balanceSrc.balance;
+            balanceOf[dst] = balanceDst.shares;
+            sharesOf[dst] = balanceDst.balance;
         }
+    }
+    function _approve(address owner, address spender, uint256 val) internal override {
+        allowance[owner][spender] = val;
+        emit Approval(msg.sender, spender, val);
     }
     /**
      * @dev approve a spender to spend msg.sender's some amount of wrapped token
@@ -333,10 +341,7 @@ contract WrapMUSDFlatten {
      * @param val amount of wrapped musd
      */
     function approve(address spender, uint256 val) external returns (bool) {
-        allowance[msg.sender][spender] = val;
-
-        emit Approval(msg.sender, spender, val);
-
+        _approve(msg.sender, spender, val);
         return true;
     }
 
